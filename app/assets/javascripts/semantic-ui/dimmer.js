@@ -137,6 +137,9 @@ $.fn.dimmer = function(parameters) {
             $module
               .removeData(moduleNamespace)
             ;
+            $dimmable
+              .off(eventNamespace)
+            ;
           }
         },
 
