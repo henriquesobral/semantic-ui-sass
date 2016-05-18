@@ -66,7 +66,7 @@ $.fn.modal = function(parameters) {
         element         = this,
         instance        = $module.data(moduleNamespace),
 
-        elementNamespace,
+        elementEventNamespace,
         id,
         observer,
         module
@@ -134,7 +134,7 @@ $.fn.modal = function(parameters) {
           },
           id: function() {
             id = (Math.random().toString(16) + '000000000').substr(2,8);
-            elementNamespace = '.' + id;
+            elementEventNamespace = '.' + id;
             module.verbose('Creating unique id for element', id);
           }
         },
@@ -145,7 +145,8 @@ $.fn.modal = function(parameters) {
             .removeData(moduleNamespace)
             .off(eventNamespace)
           ;
-          $window.off(elementNamespace);
+          $window.off(elementEventNamespace);
+          $dimmer.off(elementEventNamespace);
           $close.off(eventNamespace);
           $context.dimmer('destroy');
         },
@@ -206,7 +207,7 @@ $.fn.modal = function(parameters) {
               .on('click' + eventNamespace, selector.deny, module.event.deny)
             ;
             $window
-              .on('resize' + elementNamespace, module.event.resize)
+              .on('resize' + elementEventNamespace, module.event.resize)
             ;
           }
         },
@@ -496,7 +497,7 @@ $.fn.modal = function(parameters) {
           clickaway: function() {
             if(settings.closable) {
               $dimmer
-                .off('click' + elementNamespace)
+                .off('click' + elementEventNamespace)
               ;
             }
           },
@@ -581,7 +582,7 @@ $.fn.modal = function(parameters) {
           clickaway: function() {
             if(settings.closable) {
               $dimmer
-                .on('click' + elementNamespace, module.event.click)
+                .on('click' + elementEventNamespace, module.event.click)
               ;
             }
           },
